@@ -31,7 +31,6 @@ git clone --bare https://github.com/conan-ci-sandbox/libD.git
 git clone --bare https://github.com/conan-ci-sandbox/App.git
 git clone --bare https://github.com/conan-ci-sandbox/App2.git
 git clone --bare https://github.com/conan-ci-sandbox/products.git
-git clone --bare https://github.com/conan-ci-sandbox/release.git
 
 cat << 'EOL' > /var/lib/jenkins/git_server/libA.git/hooks/post-receive
 #!/bin/sh
