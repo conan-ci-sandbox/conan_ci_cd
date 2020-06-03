@@ -46,7 +46,7 @@ curl -uadmin:${artifactory_pass} -XPUT http://${address}/artifactory/api/v2/secu
 
 echo "------ Conan client configuration ------"
 
-conan config install https://github.com/conan-ci-cd-training/settings.git
+conan config install https://github.com/conan-ci-sandbox/settings.git
 
 conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop
 conan remote add conan-tmp http://${address}:8081/artifactory/api/conan/conan-tmp
@@ -64,5 +64,5 @@ echo "------ Jenkins configuration ------"
 
 conan_build_info --v2 start conan-app 1
 
-docker exec -it jenkins /bin/bash -c "curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/init_jenkins.sh -O;chmod +x init_jenkins.sh;./init_jenkins.sh ${artifactory_pass} ${jenkins_pass}"
+docker exec -it jenkins /bin/bash -c "curl https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/setup_jenkins/init_jenkins.sh -O;chmod +x init_jenkins.sh;./init_jenkins.sh ${artifactory_pass} ${jenkins_pass}"
 

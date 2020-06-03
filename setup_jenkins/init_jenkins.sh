@@ -16,7 +16,7 @@ git config --global user.name "Your Name"
 
 echo "Configure conan"
 
-conan config install https://github.com/conan-ci-cd-training/settings.git
+conan config install https://github.com/conan-ci-sandbox/settings.git
 
 echo "Clone libraries"
 
@@ -24,14 +24,14 @@ mkdir /var/lib/jenkins/git_server
 
 cd /var/lib/jenkins/git_server
 
-git clone --bare https://github.com/conan-ci-cd-training/libA.git
-git clone --bare https://github.com/conan-ci-cd-training/libB.git
-git clone --bare https://github.com/conan-ci-cd-training/libC.git
-git clone --bare https://github.com/conan-ci-cd-training/libD.git
-git clone --bare https://github.com/conan-ci-cd-training/App.git
-git clone --bare https://github.com/conan-ci-cd-training/App2.git
-git clone --bare https://github.com/conan-ci-cd-training/products.git
-git clone --bare https://github.com/conan-ci-cd-training/release.git
+git clone --bare https://github.com/conan-ci-sandbox/libA.git
+git clone --bare https://github.com/conan-ci-sandbox/libB.git
+git clone --bare https://github.com/conan-ci-sandbox/libC.git
+git clone --bare https://github.com/conan-ci-sandbox/libD.git
+git clone --bare https://github.com/conan-ci-sandbox/App.git
+git clone --bare https://github.com/conan-ci-sandbox/App2.git
+git clone --bare https://github.com/conan-ci-sandbox/products.git
+git clone --bare https://github.com/conan-ci-sandbox/release.git
 
 cat << 'EOL' > /var/lib/jenkins/git_server/libA.git/hooks/post-receive
 #!/bin/sh
@@ -82,22 +82,22 @@ mkdir /dev_labs
 mkdir /promotion_labs
 mkdir /promotion_labs/automation
 
-curl -o /ci_labs/lab3.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/ci_labs/lab3.sh
-curl -o /ci_labs/lab4.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/ci_labs/lab4.sh
+curl -o /ci_labs/lab3.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/ci_labs/lab3.sh
+curl -o /ci_labs/lab4.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/ci_labs/lab4.sh
 
-curl -o /dev_labs/lab1.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/dev_labs/lab1.sh
-curl -o /dev_labs/lab2.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/dev_labs/lab2.sh
-curl -o /dev_labs/lab5.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/dev_labs/lab5.sh
+curl -o /dev_labs/lab1.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/dev_labs/lab1.sh
+curl -o /dev_labs/lab2.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/dev_labs/lab2.sh
+curl -o /dev_labs/lab5.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/dev_labs/lab5.sh
 
-curl -o /promotion_labs/lab6.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab6.sh
-curl -o /promotion_labs/lab7.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab7.sh
-curl -o /promotion_labs/lab8.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab8.sh
-curl -o /promotion_labs/lab9.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab9.sh
-curl -o /promotion_labs/lab10.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab10.sh
-curl -o /promotion_labs/generateDebianPkg.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/generateDebianPkg.sh
+curl -o /promotion_labs/lab6.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/lab6.sh
+curl -o /promotion_labs/lab7.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/lab7.sh
+curl -o /promotion_labs/lab8.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/lab8.sh
+curl -o /promotion_labs/lab9.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/lab9.sh
+curl -o /promotion_labs/lab10.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/lab10.sh
+curl -o /promotion_labs/generateDebianPkg.sh https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/generateDebianPkg.sh
 
-curl -o /promotion_labs/automation/filespec.json https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/automation/filespec.json
-curl -o /promotion_labs/automation/query.aql https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/automation/query.aql
+curl -o /promotion_labs/automation/filespec.json https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/automation/filespec.json
+curl -o /promotion_labs/automation/query.aql https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/labs/promotion_labs/automation/query.aql
 
 find /ci_labs -name "*.sh" -exec chmod +x {} \;
 find /dev_labs -name "*.sh" -exec chmod +x {} \;
@@ -136,16 +136,16 @@ rm -rf /workdir/App2
 cd /var/lib/jenkins
 
 echo "------ Create libraries with DEBUG profile ------"
-docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan remote add conan-tmp http://${address}:8081/artifactory/api/conan/conan-tmp;conan user -p ${artifactory_pass} -r conan-tmp admin;conan install App/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm;conan upload '*' --all -r conan-tmp --confirm"
+docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-sandbox/libA.git && sudo git clone --bare https://github.com/conan-ci-sandbox/libB.git && sudo git clone --bare https://github.com/conan-ci-sandbox/libC.git && sudo git clone --bare https://github.com/conan-ci-sandbox/libD.git && sudo git clone --bare https://github.com/conan-ci-sandbox/App.git && sudo git clone --bare https://github.com/conan-ci-sandbox/App2.git && conan config install https://github.com/conan-ci-sandbox/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan remote add conan-tmp http://${address}:8081/artifactory/api/conan/conan-tmp;conan user -p ${artifactory_pass} -r conan-tmp admin;conan install App/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm;conan upload '*' --all -r conan-tmp --confirm"
 echo "------ Create libraries with RELEASE profile ------"
-docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan remote add conan-tmp http://${address}:8081/artifactory/api/conan/conan-tmp;conan user -p ${artifactory_pass} -r conan-tmp admin;conan install App/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm;conan upload '*' --all -r conan-tmp --confirm"
+docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-sandbox/libA.git && sudo git clone --bare https://github.com/conan-ci-sandbox/libB.git && sudo git clone --bare https://github.com/conan-ci-sandbox/libC.git && sudo git clone --bare https://github.com/conan-ci-sandbox/libD.git && sudo git clone --bare https://github.com/conan-ci-sandbox/App.git && sudo git clone --bare https://github.com/conan-ci-sandbox/App2.git && conan config install https://github.com/conan-ci-sandbox/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan remote add conan-tmp http://${address}:8081/artifactory/api/conan/conan-tmp;conan user -p ${artifactory_pass} -r conan-tmp admin;conan install App/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm;conan upload '*' --all -r conan-tmp --confirm"
 
 echo "------ Configure Jenkins jobs ------"
 
 rm -rf /var/lib/jenkins/jobs/maven-pipeline/
 rm -rf /var/lib/jenkins/jobs/maven-promotion/
 
-curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/jenkins_jobs.tgz -O
+curl https://raw.githubusercontent.com/conan-ci-sandbox/conan_ci_cd/master/setup_jenkins/jenkins_jobs.tgz -O
 
 tar -xvf jenkins_jobs.tgz --directory /var/lib/jenkins/jobs
 
